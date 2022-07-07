@@ -27,7 +27,7 @@ const GeoForm: FC = () => {
     const { values, errors, touched, handleChange, handleSubmit } = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: async (values, { resetForm }) => {
+        onSubmit: async (values) => {
             console.log(values);
             setStatus('loading');
             try {
@@ -43,7 +43,6 @@ const GeoForm: FC = () => {
                     setMessage(zone.data.message);
                 } else if (zone.data && zone.data.status == 'OK') {
                     setMessage(zone.data.zoneName);
-                    resetForm();
                 } else {
                     setMessage('Unknown Error');
                 }
@@ -102,21 +101,6 @@ const GeoForm: FC = () => {
                     <CircularProgress />
                 </Box>
             ) : null}
-            {/* {status ? (
-                <Box>
-                    {status == 'loading' ? (
-                        <Box p={3} mt={6}>
-                            <CircularProgress />
-                        </Box>
-                    ) : (
-                        <Box p={3} mt={6} sx={{ backgroundColor: '#5848DB' }}>
-                            <Typography variant="h4" color="white">
-                                {message}
-                            </Typography>
-                        </Box>
-                    )}
-                </Box>
-            ) : null} */}
         </Box>
     );
 };
